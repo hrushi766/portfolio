@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monarch Studios | Premium Freelance Agency</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --surface: #000000;
+            --card-bg: #161616;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --accent: #E31E24;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(0, 0, 0, 0.4);
+            --nav-bg-scroll: rgba(0, 0, 0, 0.6);
+            --nav-blur: 20px;
+        }
+
+        .light-theme {
+            --surface: #ffffff;
+            --card-bg: #f3f4f6;
+            --text-primary: #000000;
+            --text-secondary: #4b5563;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(255, 255, 255, 0.4);
+            --nav-bg-scroll: rgba(255, 255, 255, 0.6);
+            --nav-blur: 20px;
+        }
+
+        body {
+            background-color: var(--surface);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Semantic Overrides for Light Theme */
+        .light-theme .text-white {
+            color: var(--text-primary) !important;
+        }
+
+        .light-theme .text-gray-400 {
+            color: var(--text-secondary) !important;
+        }
+
+        .light-theme .text-gray-500 {
+            color: var(--text-secondary) !important;
+        }
+
+        .light-theme .bg-black {
+            background-color: var(--surface) !important;
+        }
+
+        .light-theme .bg-black\/80 {
+            background-color: var(--nav-bg) !important;
+        }
+
+        .light-theme .bg-black\/95 {
+            background-color: var(--nav-bg-scroll) !important;
+        }
+
+        .light-theme .border-white\/10 {
+            border-color: var(--border-color) !important;
+        }
+
+        .light-theme .border-white\/5 {
+            border-color: var(--border-color) !important;
+        }
+
+        .light-theme .bg-white\/5 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .light-theme .hover\:bg-white\/10:hover {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-theme .hover\:bg-white\/5:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .light-theme .hover\:text-white:hover {
+            color: var(--text-primary) !important;
+        }
+
+        /* Specific Component Tweaks */
+        .light-theme .stat-card {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme .outline-text {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-theme #lang-menu {
+            background-color: #ffffff !important;
+            border-color: var(--border-color);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme #lang-menu button:hover {
+            background-color: #f3f4f6 !important;
+        }
+
+        .light-theme nav h1 {
+            color: var(--text-primary);
+        }
+
+        /* Modal Theme Support */
+        .light-theme #service-modal {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .light-theme #service-modal>div {
+            background-color: #ffffff !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Team Modal Theme Support */
+        .light-theme #team-modal {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .light-theme #team-modal>div {
+            background-color: #ffffff !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Mobile Menu Theme Support */
+        .light-theme #mobile-menu {
+            background-color: #ffffff !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme #mobile-menu a {
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .light-theme #mobile-menu button {
+            background-color: #f3f4f6;
+            color: #000000;
+        }
+
+        .light-theme #mobile-menu button:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .light-theme .text-gray-300 {
+            color: #374151 !important;
+        }
+
+        .light-theme .bg-red-600\/10 {
+            background-color: rgba(227, 30, 36, 0.1) !important;
+        }
+
+        /* Service Card Icon Hover */
+        .light-theme .stat-card:hover .bg-red-600\/10 {
+            background-color: #E31E24 !important;
+        }
+
+        .heading-font {
+            font-family: 'Bebas Neue', cursive;
+        }
+
+        /* Smooth View Transitions (Upreach Style) */
+        .view-layer {
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            min-height: 100vh;
+        }
+
+        .view-hidden {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .view-active {
+            transform: translateX(0);
+            opacity: 1;
+            position: relative;
+        }
+
+        /* KPI Stat Cards */
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-8px);
+        }
+
+        .outline-text {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+
+        .light-theme .outline-text {
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Marquee for the "Master Every Move" look */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .animate-marquee {
+            animation: marquee 25s linear infinite;
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #E31E24;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphism Navigation */
+        nav {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease-in-out !important;
+            border: none !important;
+            transform: scale(1) translateY(0) !important;
+            opacity: 1 !important;
+        }
+
+        /* Fade out class for transition */
+        nav.fading {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease-out !important;
+        }
+
+        nav.scrolled {
+            top: 1.5rem !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) scale(0.98) !important;
+            width: 90% !important;
+            max-width: 1200px !important;
+            background: var(--nav-bg-scroll) !important;
+            backdrop-filter: blur(30px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 9999px !important;
+            padding: 0.875rem 2.5rem !important;
+            opacity: 1 !important;
+        }
+
+        .light-theme nav.scrolled {
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* Smooth animation for nav content */
+        nav .max-w-7xl {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @media (max-width: 1024px) {
+            nav.scrolled {
+                width: 95% !important;
+                padding: 0.75rem 1.25rem !important;
+                transform: translateX(-50%) scale(0.98) !important;
+            }
+        }
+
+        /* Add subtle bounce animation */
+        @keyframes navFloat {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(0.98) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(0.98) translateY(-2px);
+            }
+        }
+
+        nav.scrolled {
+            animation: navFloat 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="fixed top-0 left-0 right-0 z-[100] px-4 md:px-6 py-4 transition-all duration-500">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 onclick="showView('home')"
+                class="text-lg sm:text-xl md:text-xl lg:text-3xl font-900 tracking-tighter cursor-pointer flex items-center gap-2 shrink-0 relative z-[102]">
+                <img src="assets/logo.png" alt="Monarch Logo"
+                    class="h-6 w-6 sm:h-8 sm:w-8 md:h-8 md:w-8 lg:h-10 lg:w-10 rounded-full object-cover">
+                <span class="whitespace-nowrap"><span class="text-[#E31E24]">MONARCH</span> STUDIOS</span>
+            </h1>
+
+            <div
+                class="hidden md:flex md:gap-4 lg:gap-10 text-[10px] md:text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.2em] text-gray-400 shrink-0">
+                <a href="#services" id="nav-services" class="hover:text-white transition-colors"
+                    data-i18n="nav_services">Services</a>
+                <a href="team.html" id="nav-team" class="hover:text-white transition-colors"
+                    data-i18n="nav_team">Team</a>
+                <a href="#testimonials" id="nav-testimonials" class="hover:text-white transition-colors"
+                    data-i18n="nav_testimonials">Testimonials</a>
+                <a href="#faq" id="nav-faq" class="hover:text-white transition-colors" data-i18n="nav_faq">FAQ</a>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-3 shrink-0 relative z-[102]">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="bg-white/5 border border-white/10 p-2 rounded-full hover:bg-white/10 transition-colors text-white"
+                    aria-label="Toggle Theme">
+                    <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+                </button>
+
+                <button
+                    class="hidden md:block bg-white text-black md:px-3 md:py-1.5 lg:px-6 lg:py-2.5 rounded-full font-bold text-[10px] lg:text-xs uppercase tracking-widest hover:bg-[#E31E24] hover:text-white transition-all whitespace-nowrap">Book
+                    a call</button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()"
+                    class="md:hidden bg-white/5 border border-white/10 p-2 rounded-full hover:bg-white/10 transition-colors text-white relative z-[102]"
+                    aria-label="Toggle Menu">
+                    <i id="mobile-menu-icon" data-lucide="menu" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div id="mobile-menu"
+                class="absolute top-full left-0 w-full mt-2 bg-[#161616] border border-white/10 rounded-3xl p-6 shadow-2xl origin-top transition-all duration-300 transform scale-y-0 opacity-0 pointer-events-none md:hidden overflow-hidden">
+                <div class="flex flex-col gap-6 text-center w-full">
+                    <a href="#services" onclick="toggleMobileMenu()"
+                        class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                        data-i18n="nav_services">SERVICES</a>
+                    <a href="team.html" onclick="toggleMobileMenu()"
+                        class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                        data-i18n="nav_team">TEAM</a>
+                    <a href="#testimonials" onclick="toggleMobileMenu()"
+                        class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                        data-i18n="nav_testimonials">TESTIMONIALS</a>
+                    <a href="#faq" onclick="toggleMobileMenu()"
+                        class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                        data-i18n="nav_faq">FAQ</a>
+                    <div class="mt-2 w-full">
+                        <button onclick="toggleMobileMenu()"
+                            class="bg-white text-black px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#E31E24] hover:text-white transition-all w-full">Book
+                            a call</button>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+    <div id="view-home" class="view-layer view-active">
+
+        <header class="max-w-7xl mx-auto px-4 md:px-6 pt-24 pb-20 md:pt-32 md:pb-32 text-center relative">
+            <div
+                class="absolute top-10 left-10 w-40 h-40 md:w-64 md:h-64 bg-red-600/10 rounded-full blur-[80px] md:blur-[120px]">
+            </div>
+
+            <span
+                class="inline-block px-4 py-1.5 rounded-full border border-white/10 text-[9px] md:text-[10px] font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase mb-6 md:mb-8 text-red-500"
+                data-i18n="hero_badge">
+                Master your digital empire
+            </span>
+
+            <h2
+                class="heading-font text-5xl sm:text-7xl md:text-8xl lg:text-[11rem] leading-[0.9] mb-8 tracking-tighter min-h-[1.8em] sm:min-h-[1.8em] md:min-h-[1.7em]">
+                <span id="typing-1"></span><br>
+                <span id="typing-2" class="outline-text"></span>
+            </h2>
+
+            <p class="max-w-2xl mx-auto text-gray-400 text-sm md:text-lg mb-8 md:mb-12 px-4" data-i18n="hero_desc">
+                Helping businesses thrive with innovative digital strategies, creative solutions, and measurable
+                outcomes.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center px-4">
+                <button
+                    class="bg-[#E31E24] px-8 py-4 md:px-10 md:py-5 rounded-2xl font-black text-lg md:text-xl heading-font tracking-widest hover:scale-105 transition-transform"
+                    data-i18n="hero_cta_primary">Get
+                    Started</button>
+                <button
+                    class="px-8 py-4 md:px-10 md:py-5 rounded-2xl font-black text-lg md:text-xl heading-font tracking-widest border border-white/10 hover:bg-white/5 transition-all"
+                    data-i18n="hero_cta_secondary">Learn
+                    More</button>
+            </div>
+        </header>
+
+        <section class="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20 md:mb-32">
+            <div class="stat-card p-6 md:p-10 text-center">
+                <h3 class="text-2xl md:text-4xl font-black mb-2">+65%</h3>
+                <p class="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-widest"
+                    data-i18n="stat_roi">ROI Boost</p>
+            </div>
+            <div class="stat-card p-6 md:p-10 text-center">
+                <h3 class="text-2xl md:text-4xl font-black mb-2">2k+</h3>
+                <p class="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-widest"
+                    data-i18n="stat_success">Success
+                    Stories</p>
+            </div>
+            <div class="stat-card p-6 md:p-10 text-center">
+                <h3 class="text-2xl md:text-4xl font-black mb-2">98%</h3>
+                <p class="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-widest"
+                    data-i18n="stat_rate">Client
+                    Success Rate</p>
+            </div>
+            <div class="stat-card p-6 md:p-10 text-center">
+                <h3 class="text-2xl md:text-4xl font-black mb-2">$250K+</h3>
+                <p class="text-[10px] md:text-xs font-bold text-gray-500 uppercase tracking-widest"
+                    data-i18n="stat_revenue">Revenue
+                    Generated</p>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="max-w-7xl mx-auto px-4 md:px-6 py-20 md:py-32 relative overflow-hidden">
+            <!-- Testimonials content will go here -->
+        </section>
+
+        <section id="services" class="max-w-7xl mx-auto px-4 md:px-6 pb-20 md:pb-32">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                class="mb-8 md:mb-12 text-gray-500 font-bold flex items-center gap-2 hover:text-white transition-colors"
+                data-i18n="back_to_top">
+                <i data-lucide="arrow-up"></i> BACK TO TOP
+            </button>
+
+            <div class="mb-10 md:mb-16">
+                <span class="text-red-500 font-bold uppercase tracking-[0.3em] text-[9px] md:text-[10px]"
+                    data-i18n="services_badge">What we offer</span>
+                <h2 class="heading-font text-4xl md:text-6xl mt-2" data-i18n="services_title">Comprehensive solutions
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-8" id="service-grid">
+            </div>
+        </section>
+    </div>
+
+    <div id="view-detail" class="view-layer view-hidden bg-black">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-20 md:py-24 min-h-screen flex flex-col justify-center">
+            <button onclick="showView('home')"
+                class="mb-8 md:mb-12 text-gray-500 font-bold flex items-center gap-2 hover:text-white transition-colors"
+                data-i18n="back_overview">
+                <i data-lucide="arrow-left"></i> BACK TO OVERVIEW
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
+                <div>
+                    <h2 id="det-title"
+                        class="heading-font text-5xl md:text-[8rem] lg:text-[10rem] leading-none mb-6 md:mb-8">Digital
+                        Marketing
+                    </h2>
+                    <p id="det-desc" class="text-gray-400 text-lg md:text-xl leading-relaxed mb-8 md:mb-12"></p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mb-8 md:mb-12">
+                        <div class="border-l-2 border-red-600 pl-6">
+                            <h4 class="font-bold text-2xl mb-1">70%</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-widest" data-i18n="detail_stat_1">Organic
+                                Traffic Growth</p>
+                        </div>
+                        <div class="border-l-2 border-red-600 pl-6">
+                            <h4 class="font-bold text-2xl mb-1">85%</h4>
+                            <p class="text-xs text-gray-500 uppercase tracking-widest" data-i18n="detail_stat_2">Revenue
+                                Growth</p>
+                        </div>
+                    </div>
+
+                    <button
+                        class="bg-[#E31E24] px-8 py-4 md:px-12 md:py-5 rounded-2xl font-black heading-font text-xl md:text-2xl tracking-widest hover:scale-105 transition-transform"
+                        data-i18n="detail_cta">Book
+                        Strategy Call</button>
+                </div>
+
+                <div class="relative hidden md:block">
+                    <div class="absolute inset-0 bg-red-600/10 blur-[150px]"></div>
+                    <div class="stat-card p-12 relative z-10 border-white/10">
+                        <i data-lucide="trending-up" class="w-20 h-20 text-red-600 mb-8"></i>
+                        <h3 class="text-3xl font-black mb-4" data-i18n="detail_card_title">Results-Driven Process</h3>
+                        <p class="text-gray-400" data-i18n="detail_card_desc">We create impactful strategies, refine
+                            brand positioning, and drive
+                            real results through smart content and scalable campaigns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Service Info Modal -->
+    <div id="service-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-[#161616] border border-white/10 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative">
+            <!-- Close Button -->
+            <button onclick="closeServiceModal()"
+                class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center transition-colors z-10">
+                <i data-lucide="x" class="w-5 h-5 text-white"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="p-6 md:p-10">
+                <!-- Service Icon -->
+                <div class="w-16 h-16 md:w-20 md:h-20 bg-red-600/10 rounded-2xl flex items-center justify-center mb-6">
+                    <i id="modal-icon" data-lucide="zap" class="w-8 h-8 md:w-10 md:h-10 text-red-600"></i>
+                </div>
+
+                <!-- Service Title -->
+                <h2 id="modal-title" class="heading-font text-3xl md:text-5xl mb-4 md:mb-6">Service Title</h2>
+
+                <!-- Service Description -->
+                <p id="modal-desc" class="text-gray-400 text-base md:text-lg leading-relaxed mb-6 md:mb-8"></p>
+
+                <!-- Key Features -->
+                <div class="mb-6 md:mb-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4">Key Features</h3>
+                    <ul id="modal-features" class="space-y-3">
+                        <!-- Features will be inserted here -->
+                    </ul>
+                </div>
+
+                <!-- What You Get -->
+                <div class="mb-6 md:mb-8">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4">What You Get</h3>
+                    <div id="modal-benefits" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Benefits will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <button
+                    class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl transition-colors text-sm md:text-base">
+                    Get Started with <span id="modal-cta-service">This Service</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-black border-t border-white/5 py-12 px-6 md:py-24">
+        <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12 text-center md:text-left">
+            <div>
+                <h4 class="text-3xl md:text-4xl font-900 mb-4 tracking-tighter"><span
+                        class="text-red-600">MONARCH</span>STUDIOS
+                </h4>
+                <p class="text-gray-500 max-w-sm mx-auto md:mx-0" data-i18n="footer_text">Subscribe to our newsletter
+                    for the latest
+                    marketing insights, trends,
+                    and growth strategies.</p>
+
+                <div class="flex gap-6 mt-8 justify-center md:justify-start">
+                    <a href="https://www.linkedin.com/in/monarch-studios-8b0b543b0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                        target="_blank" rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.instagram.com/monarchstudios10?igsh=eHN1aWNjNjVkNW03" target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="w-full max-w-md flex flex-col sm:flex-row gap-2 bg-white/5 rounded-2xl p-2 border border-white/10">
+                <input type="text" placeholder="Your email address" id="email-input"
+                    class="bg-transparent flex-1 px-4 py-3 outline-none text-sm text-center sm:text-left">
+                <button
+                    class="bg-white text-black px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex-shrink-0"
+                    data-i18n="footer_subscribe">Subscribe</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeServiceModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('service-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'service-modal') {
+                closeServiceModal();
+            }
+        });
+
+        const servicesData = {
+            en: [
+                {
+                    id: 0,
+                    title: "Web Development",
+                    desc: "Build stunning, responsive websites with modern frameworks and cutting-edge technologies for seamless user experiences.",
+                    icon: "code",
+                    fullDesc: "Transform your digital presence with custom-built websites that combine stunning design with powerful functionality. We create responsive, fast-loading websites optimized for all devices and search engines.",
+                    features: [
+                        "Custom responsive design tailored to your brand",
+                        "Modern frameworks (React, Next.js, Vue)",
+                        "SEO-optimized architecture",
+                        "Lightning-fast performance",
+                        "Mobile-first approach",
+                        "Cross-browser compatibility"
+                    ],
+                    benefits: [
+                        "Professional online presence",
+                        "Increased user engagement",
+                        "Better search rankings",
+                        "Scalable infrastructure",
+                        "Ongoing support & maintenance",
+                        "Analytics integration"
+                    ]
+                },
+                {
+                    id: 1,
+                    title: "AI Workflow",
+                    desc: "Automate and optimize your business processes with intelligent AI-powered workflows and smart automation solutions.",
+                    icon: "cpu",
+                    fullDesc: "Revolutionize your business operations with AI-powered automation. We design and implement intelligent workflows that reduce manual work, minimize errors, and boost productivity across your organization.",
+                    features: [
+                        "Process automation & optimization",
+                        "Custom AI model integration",
+                        "Intelligent data processing",
+                        "Workflow orchestration",
+                        "Real-time monitoring & alerts",
+                        "Seamless system integration"
+                    ],
+                    benefits: [
+                        "Save time on repetitive tasks",
+                        "Reduce operational costs",
+                        "Improve accuracy & consistency",
+                        "Scale operations efficiently",
+                        "Data-driven insights",
+                        "24/7 automated operations"
+                    ]
+                },
+                {
+                    id: 2,
+                    title: "Chatbots",
+                    desc: "Deploy intelligent conversational AI chatbots to enhance customer engagement and provide 24/7 automated support.",
+                    icon: "message-circle",
+                    fullDesc: "Enhance customer experience with AI-powered chatbots that provide instant, accurate responses 24/7. Our intelligent chatbots handle customer queries, qualify leads, and provide personalized assistance at scale.",
+                    features: [
+                        "Natural language processing (NLP)",
+                        "Multi-platform deployment",
+                        "Contextual conversations",
+                        "Lead qualification automation",
+                        "CRM & database integration",
+                        "Analytics & performance tracking"
+                    ],
+                    benefits: [
+                        "24/7 customer support",
+                        "Instant response times",
+                        "Reduced support costs",
+                        "Improved customer satisfaction",
+                        "Automated lead generation",
+                        "Multilingual support"
+                    ]
+                },
+                {
+                    id: 3,
+                    title: "Logo Design",
+                    desc: "Create memorable, professional logos that capture your brand essence and leave a lasting impression.",
+                    icon: "palette",
+                    fullDesc: "Your logo is the face of your brand. We create unique, memorable logos that perfectly capture your brand's personality and values, ensuring you stand out in a crowded marketplace.",
+                    features: [
+                        "Custom logo concepts",
+                        "Multiple design iterations",
+                        "Vector file formats (AI, SVG, EPS)",
+                        "Color & typography guidance",
+                        "Brand style guide",
+                        "Unlimited revisions"
+                    ],
+                    benefits: [
+                        "Strong brand identity",
+                        "Professional appearance",
+                        "Memorable visual impact",
+                        "Versatile across all media",
+                        "Trademark-ready designs",
+                        "Complete file ownership"
+                    ]
+                },
+                {
+                    id: 4,
+                    title: "Poster Making",
+                    desc: "Design eye-catching posters and promotional materials that effectively communicate your message and captivate audiences.",
+                    icon: "image",
+                    fullDesc: "Make a bold statement with professionally designed posters and promotional materials. We create visually stunning designs that grab attention, communicate your message clearly, and drive action.",
+                    features: [
+                        "Custom poster designs",
+                        "Print & digital formats",
+                        "High-resolution output",
+                        "Brand-aligned aesthetics",
+                        "Multiple size variations",
+                        "Fast turnaround time"
+                    ],
+                    benefits: [
+                        "Eye-catching visuals",
+                        "Clear message delivery",
+                        "Increased event attendance",
+                        "Professional marketing materials",
+                        "Print-ready files",
+                        "Social media ready"
+                    ]
+                },
+                {
+                    id: 5,
+                    title: "SEO",
+                    desc: "Boost your online visibility and rankings with strategic SEO optimization to drive organic traffic and growth.",
+                    icon: "trending-up",
+                    fullDesc: "Dominate search engine results and drive qualified organic traffic to your website. Our comprehensive SEO strategies combine technical optimization, content strategy, and link building to improve your rankings and visibility.",
+                    features: [
+                        "Comprehensive SEO audit",
+                        "Keyword research & strategy",
+                        "On-page optimization",
+                        "Technical SEO improvements",
+                        "Link building campaigns",
+                        "Monthly performance reports"
+                    ],
+                    benefits: [
+                        "Higher search rankings",
+                        "Increased organic traffic",
+                        "Better conversion rates",
+                        "Long-term ROI",
+                        "Competitive advantage",
+                        "Measurable results"
+                    ]
+                }
+            ]
+        };
+
+        function renderServices() {
+            const grid = document.getElementById('service-grid');
+            const data = servicesData.en;
+            const learnMoreText = "Learn More";
+
+            grid.innerHTML = data.map(s => `
+                <div class="stat-card p-4 md:p-8 group cursor-pointer h-full flex flex-col" onclick="openServiceModal(${s.id})">
+                    <div class="w-8 h-8 md:w-10 md:h-10 bg-red-600/10 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-6 group-hover:bg-red-600 transition-colors shrink-0">
+                        <i data-lucide="${s.icon}" class="w-4 h-4 md:w-5 md:h-5 text-red-600 group-hover:text-white"></i>
+                    </div>
+                    <h3 class="text-xs md:text-xl font-bold mb-2 md:mb-3 leading-tight shrink-0">${s.title}</h3>
+                    <p class="text-gray-500 text-[9px] md:text-xs leading-relaxed mb-3 md:mb-6 line-clamp-3 flex-grow">${s.desc}</p>
+                    <div class="flex items-center gap-1 md:gap-2 text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-red-500 group-hover:gap-2 md:group-hover:gap-3 transition-all mt-auto">
+                        ${learnMoreText} <i data-lucide="arrow-right" class="w-3 h-3 md:w-3.5 md:h-3.5"></i>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function openServiceModal(serviceId) {
+            const service = servicesData.en.find(s => s.id === serviceId);
+            if (!service) return;
+
+            // Update modal content
+            document.getElementById('modal-title').textContent = service.title;
+            document.getElementById('modal-desc').textContent = service.fullDesc;
+            document.getElementById('modal-cta-service').textContent = service.title;
+
+            // Update icon
+            const iconEl = document.getElementById('modal-icon');
+            iconEl.setAttribute('data-lucide', service.icon);
+
+            // Update features
+            const featuresEl = document.getElementById('modal-features');
+            featuresEl.innerHTML = service.features.map(feature => `
+                <li class="flex items-start gap-3">
+                    <i data-lucide="check-circle" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                    <span class="text-gray-300 text-sm md:text-base">${feature}</span>
+                </li>
+            `).join('');
+
+            // Update benefits
+            const benefitsEl = document.getElementById('modal-benefits');
+            benefitsEl.innerHTML = service.benefits.map(benefit => `
+                <div class="flex items-start gap-3 bg-white/5 p-4 rounded-lg">
+                    <i data-lucide="star" class="w-5 h-5 text-red-500 shrink-0 mt-0.5"></i>
+                    <span class="text-gray-300 text-sm">${benefit}</span>
+                </div>
+            `).join('');
+
+            // Show modal
+            const modal = document.getElementById('service-modal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Hide navigation bar
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.style.display = 'none';
+            }
+
+            // Reinitialize lucide icons
+            lucide.createIcons();
+        }
+
+        function closeServiceModal() {
+            const modal = document.getElementById('service-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+
+            // Show navigation bar
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.style.display = '';
+            }
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeServiceModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('service-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'service-modal') {
+                closeServiceModal();
+            }
+        });
+
+        // Theme Logic
+        // Default to dark theme if no preference is saved
+        let currentTheme = localStorage.getItem('site_theme') || 'dark';
+
+        function setTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem('site_theme', theme);
+
+            // Apply class to body
+            if (theme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+
+            // Update theme toggle icon
+            const btn = document.querySelector('button[aria-label="Toggle Theme"]');
+            if (btn) {
+                const iconName = theme === 'light' ? 'moon' : 'sun';
+                btn.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i>`;
+                lucide.createIcons();
+            }
+
+            // Force re-render of service cards to apply theme
+            if (document.getElementById('service-grid').children.length > 0) {
+                renderServices();
+            }
+        }
+
+        function toggleTheme() {
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        // Initialize Theme - Force Dark Mode Default on First Visit
+        window.addEventListener('DOMContentLoaded', () => {
+            // If it's the very first visit (no storage), explicitly set to dark
+            if (!localStorage.getItem('site_theme')) {
+                setTheme('dark');
+            } else {
+                setTheme(currentTheme);
+            }
+        });
+
+        function showView(view) {
+            const home = document.getElementById('view-home');
+            const detail = document.getElementById('view-detail');
+            if (view === 'home') {
+                detail.classList.replace('view-active', 'view-hidden');
+                home.classList.replace('view-hidden', 'view-active');
+            } else {
+                home.classList.replace('view-active', 'view-hidden');
+                detail.classList.replace('view-hidden', 'view-active');
+            }
+        }
+
+        function openService(id) {
+            const s = servicesData[currentLang].find(x => x.id === id);
+            document.getElementById('det-title').innerText = s.title;
+            document.getElementById('det-desc').innerText = s.desc;
+            showView('detail');
+            window.scrollTo(0, 0);
+        }
+
+        // Typing Animation Control
+        let animationController = new AbortController();
+
+        async function typeWriter() {
+            // Cancel previous run found
+            animationController.abort();
+            animationController = new AbortController();
+            const signal = animationController.signal;
+
+            const text1 = "YOUR GROWTH,";
+            const text2 = "OUR MISSION";
+            const el1 = document.getElementById('typing-1');
+            const el2 = document.getElementById('typing-2');
+
+            if (!el1 || !el2) return;
+
+            try {
+                while (!signal.aborted) {
+                    // Initial state
+                    el1.textContent = "";
+                    el2.textContent = "";
+
+                    // Type first line
+                    el1.classList.add('typing-cursor');
+                    for (let i = 0; i < text1.length; i++) {
+                        if (signal.aborted) return;
+                        const char = text1.charAt(i);
+                        el1.textContent += char;
+
+                        let delay = Math.random() * 80 + 50;
+                        if (char === ',') delay += 400;
+                        await new Promise(r => setTimeout(r, delay));
+                    }
+                    el1.classList.remove('typing-cursor');
+
+                    // Type second line
+                    el2.classList.add('typing-cursor');
+                    for (let i = 0; i < text2.length; i++) {
+                        if (signal.aborted) return;
+                        const char = text2.charAt(i);
+                        el2.textContent += char;
+
+                        let delay = Math.random() * 80 + 50;
+                        await new Promise(r => setTimeout(r, delay));
+                    }
+
+                    // Pause before restarting
+                    await new Promise(r => setTimeout(r, 3000));
+                    el2.classList.remove('typing-cursor');
+                }
+            } catch (e) {
+                // Ignore abort errors
+            }
+        }
+
+        function restartTypingAnimation() {
+            // Basic check to see if we should start it (is visible)
+            const el1 = document.getElementById('typing-1');
+            if (el1 && el1.offsetParent !== null) {
+                typeWriter();
+            }
+        }
+
+        // Initialize
+        // Initialize Services & Typing Effect
+        document.addEventListener('DOMContentLoaded', () => {
+            renderServices();
+
+            // Start typing when visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        typeWriter();
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            const el1 = document.getElementById('typing-1');
+            if (el1) observer.observe(el1.parentElement);
+        });
+
+        // Glassmorphism Navigation Scroll Effect with Fade Animation
+        const nav = document.querySelector('nav');
+        let isScrolled = false;
+        let fadeTimeout;
+
+        window.addEventListener('scroll', () => {
+            const shouldBeScrolled = window.scrollY > 50;
+
+            // Only animate if state is changing
+            if (shouldBeScrolled !== isScrolled) {
+                // Clear any pending timeout
+                clearTimeout(fadeTimeout);
+
+                // Add fading class for fade-out effect
+                nav.classList.add('fading');
+
+                // After fade-out completes, change state and fade back in
+                fadeTimeout = setTimeout(() => {
+                    if (shouldBeScrolled) {
+                        nav.classList.add('scrolled');
+                    } else {
+                        nav.classList.remove('scrolled');
+                    }
+
+                    // Remove fading class to fade back in
+                    setTimeout(() => {
+                        nav.classList.remove('fading');
+                    }, 50);
+                }, 300); // Match the fade-out duration
+
+                isScrolled = shouldBeScrolled;
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('mobile-menu-icon');
+            const isClosed = mobileMenu.classList.contains('scale-y-0');
+
+            if (!isClosed) {
+                // Close Menu
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-y-0');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            } else {
+                // Open Menu
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-y-0');
+                menuIcon.setAttribute('data-lucide', 'x');
+            }
+
+            // Re-render icons for the new menu state
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>

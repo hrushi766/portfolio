@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team | Monarch Studios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=Bebas+Neue&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --surface: #000000;
+            --card-bg: #161616;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --accent: #E31E24;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(0, 0, 0, 0.4);
+            --nav-bg-scroll: rgba(0, 0, 0, 0.6);
+            --nav-blur: 20px;
+        }
+
+        .light-theme {
+            --surface: #ffffff;
+            --card-bg: #f3f4f6;
+            --text-primary: #000000;
+            --text-secondary: #4b5563;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --nav-bg: rgba(255, 255, 255, 0.4);
+            --nav-bg-scroll: rgba(255, 255, 255, 0.6);
+            --nav-blur: 20px;
+        }
+
+        body {
+            background-color: var(--surface);
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Semantic Overrides for Light Theme */
+        .light-theme .text-white {
+            color: var(--text-primary) !important;
+        }
+
+        .light-theme .text-gray-400 {
+            color: var(--text-secondary) !important;
+        }
+
+        .light-theme .text-gray-500 {
+            color: var(--text-secondary) !important;
+        }
+
+        .light-theme .bg-black {
+            background-color: var(--surface) !important;
+        }
+
+        .light-theme .bg-black\/80 {
+            background-color: var(--nav-bg) !important;
+        }
+
+        .light-theme .bg-black\/95 {
+            background-color: var(--nav-bg-scroll) !important;
+        }
+
+        .light-theme .border-white\/10 {
+            border-color: var(--border-color) !important;
+        }
+
+        .light-theme .border-white\/5 {
+            border-color: var(--border-color) !important;
+        }
+
+        .light-theme .bg-white\/5 {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .light-theme .hover\:bg-white\/10:hover {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .light-theme .hover\:bg-white\/5:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .light-theme .hover\:text-white:hover {
+            color: var(--text-primary) !important;
+        }
+
+        /* Specific Component Tweaks */
+        .light-theme .stat-card {
+            background: var(--card-bg);
+            border-color: var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme nav h1 {
+            color: var(--text-primary);
+        }
+
+        /* Team Modal Theme Support */
+        .light-theme #team-modal {
+            background-color: rgba(0, 0, 0, 0.5) !important;
+        }
+
+        .light-theme #team-modal>div {
+            background-color: #ffffff !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Mobile Menu Theme Support */
+        .light-theme #mobile-menu {
+            background-color: #ffffff !important;
+            border-color: var(--border-color) !important;
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-theme #mobile-menu a {
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .light-theme #mobile-menu button {
+            background-color: #f3f4f6;
+            color: #000000;
+        }
+
+        .light-theme #mobile-menu button:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .light-theme .text-gray-300 {
+            color: #374151 !important;
+        }
+
+        .light-theme .bg-red-600\/10 {
+            background-color: rgba(227, 30, 36, 0.1) !important;
+        }
+
+        /* Service Card Icon Hover */
+        .light-theme .stat-card:hover .bg-red-600\/10 {
+            background-color: #E31E24 !important;
+        }
+
+        .heading-font {
+            font-family: 'Bebas Neue', cursive;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                opacity 0.4s ease-in-out !important;
+            border: none !important;
+            transform: scale(1) translateY(0) !important;
+            opacity: 1 !important;
+        }
+
+        /* Fade out class for transition */
+        nav.fading {
+            opacity: 0 !important;
+            transition: opacity 0.3s ease-out !important;
+        }
+
+        nav.scrolled {
+            top: 1.5rem !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) scale(0.98) !important;
+            width: 90% !important;
+            max-width: 1200px !important;
+            background: var(--nav-bg-scroll) !important;
+            backdrop-filter: blur(30px) saturate(180%) !important;
+            -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            border-radius: 9999px !important;
+            padding: 0.875rem 2.5rem !important;
+            opacity: 1 !important;
+        }
+
+        .light-theme nav.scrolled {
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+        }
+
+        nav .max-w-7xl {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @media (max-width: 1024px) {
+            nav.scrolled {
+                width: 95% !important;
+                padding: 0.75rem 1.25rem !important;
+                transform: translateX(-50%) scale(0.98) !important;
+            }
+        }
+
+        /* Add subtle bounce animation */
+        @keyframes navFloat {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(0.98) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) scale(0.98) translateY(-2px);
+            }
+        }
+
+        nav.scrolled {
+            animation: navFloat 3s ease-in-out infinite;
+        }
+
+        /* Accordion Team Styles */
+        .team-accordion {
+            display: flex;
+            width: 100%;
+            height: 400px;
+            /* Reduced height for mobile optimization */
+            gap: 0.5rem;
+            /* Tighter gap */
+        }
+
+        .team-card {
+            flex: 0.5;
+            /* Start smaller */
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 0;
+            /* Important for flex shrinking */
+        }
+
+        .team-card:hover,
+        .team-card.active {
+            flex: 3.5;
+            /* Expand more relative to others */
+            border-color: #E31E24;
+        }
+
+        .team-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: transform 0.5s ease;
+            filter: grayscale(100%);
+        }
+
+        .team-card:hover img,
+        .team-card.active img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .team-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease 0.1s;
+            white-space: nowrap;
+            /* Prevent text wrapping issues during animation */
+        }
+
+        .team-card:hover .team-info,
+        .team-card.active .team-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .team-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            /* Smaller icon default */
+            height: 40px;
+            background: rgba(227, 30, 36, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(227, 30, 36, 0.3);
+            transition: all 0.3s ease;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .team-card:hover .team-icon,
+        .team-card.active .team-icon {
+            opacity: 0;
+            transform: translate(-50%, -150%);
+        }
+
+        @media (min-width: 768px) {
+            .team-accordion {
+                height: 500px;
+                gap: 1rem;
+            }
+
+            .team-card {
+                flex: 1;
+                border-radius: 1.5rem;
+            }
+
+            .team-card:hover,
+            .team-card.active {
+                flex: 3;
+            }
+
+            .team-info {
+                padding: 2rem;
+                white-space: normal;
+            }
+
+            .team-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            /* Force Horizontal Layout on Mobile */
+            .team-accordion {
+                flex-direction: row;
+                overflow-x: hidden;
+                /* Prevent horizontal scroll if animating wide */
+            }
+
+            /* Hide icon on inactive cards to save space */
+            .team-card:not(.active) .team-icon {
+                opacity: 0;
+            }
+
+            /* Adjust active card content */
+            .team-card.active .team-info h3 {
+                font-size: 1.25rem;
+            }
+
+            .team-card.active .team-info p {
+                font-size: 0.75rem;
+            }
+
+            .team-card.active .team-info button {
+                margin-top: 0.5rem;
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="fixed top-0 left-0 right-0 z-[100] px-4 md:px-6 py-4 transition-all duration-500">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html"
+                class="text-lg sm:text-xl md:text-xl lg:text-3xl font-900 tracking-tighter cursor-pointer flex items-center gap-2 shrink-0 relative z-[102] no-underline">
+                <img src="assets/logo.png" alt="Monarch Logo"
+                    class="h-6 w-6 sm:h-8 sm:w-8 md:h-8 md:w-8 lg:h-10 lg:w-10 rounded-full object-cover">
+                <span class="whitespace-nowrap"><span class="text-[#E31E24]">MONARCH</span> STUDIOS</span>
+            </a>
+
+            <div
+                class="hidden md:flex md:gap-4 lg:gap-10 text-[10px] md:text-[10px] lg:text-[11px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.2em] text-gray-400 shrink-0">
+                <a href="index.html" class="hover:text-white transition-colors" data-i18n="nav_home">Home</a>
+                <a href="index.html#services" class="hover:text-white transition-colors"
+                    data-i18n="nav_services">Services</a>
+                <a href="#" class="text-white transition-colors" data-i18n="nav_team">Team</a>
+                <a href="index.html#testimonials" class="hover:text-white transition-colors"
+                    data-i18n="nav_testimonials">Testimonials</a>
+                <a href="index.html#faq" class="hover:text-white transition-colors" data-i18n="nav_faq">FAQ</a>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-3 shrink-0 relative z-[102]">
+                <!-- Theme Toggle -->
+                <button onclick="toggleTheme()"
+                    class="bg-white/5 border border-white/10 p-2 rounded-full hover:bg-white/10 transition-colors text-white"
+                    aria-label="Toggle Theme">
+                    <i id="theme-icon" data-lucide="sun" class="w-4 h-4"></i>
+                </button>
+
+                <button
+                    class="hidden md:block bg-white text-black md:px-3 md:py-1.5 lg:px-6 lg:py-2.5 rounded-full font-bold text-[10px] lg:text-xs uppercase tracking-widest hover:bg-[#E31E24] hover:text-white transition-all whitespace-nowrap">Book
+                    a call</button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()"
+                    class="md:hidden bg-white/5 border border-white/10 p-2 rounded-full hover:bg-white/10 transition-colors text-white relative z-[102]"
+                    aria-label="Toggle Menu">
+                    <i id="mobile-menu-icon" data-lucide="menu" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu"
+            class="absolute top-full left-0 w-full mt-2 bg-[#161616] border border-white/10 rounded-3xl p-6 shadow-2xl origin-top transition-all duration-300 transform scale-y-0 opacity-0 pointer-events-none md:hidden overflow-hidden">
+            <div class="flex flex-col gap-6 text-center w-full">
+                <a href="index.html"
+                    class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                    data-i18n="nav_home">HOME</a>
+                <a href="index.html#services"
+                    class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                    data-i18n="nav_services">SERVICES</a>
+                <a href="#"
+                    class="text-xl font-black heading-font tracking-widest text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                    data-i18n="nav_team">TEAM</a>
+                <a href="index.html#testimonials"
+                    class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                    data-i18n="nav_testimonials">TESTIMONIALS</a>
+                <a href="index.html#faq"
+                    class="text-xl font-black heading-font tracking-widest hover:text-[#E31E24] transition-colors py-2 border-b border-white/5"
+                    data-i18n="nav_faq">FAQ</a>
+                <div class="mt-2 w-full">
+                    <button
+                        class="bg-white text-black px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#E31E24] hover:text-white transition-all w-full">Book
+                        a call</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20 md:pb-32 px-4 md:px-6">
+        <section id="team" class="max-w-7xl mx-auto">
+            <div class="mb-10 md:mb-16 text-center">
+                <span class="text-red-500 font-bold uppercase tracking-[0.3em] text-[9px] md:text-[10px]">
+                    Meet the Team
+                </span>
+                <h2 class="heading-font text-4xl md:text-6xl mt-2">The Minds Behind the Magic</h2>
+                <p class="text-gray-400 text-sm md:text-base mt-4 max-w-2xl mx-auto">
+                    Our talented team of professionals dedicated to bringing your vision to life
+                </p>
+            </div>
+
+            <div class="team-accordion" id="team-accordion">
+                <!-- Team member cards will be rendered here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Team Member Modal -->
+    <div id="team-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-[#161616] border border-white/10 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <!-- Close Button -->
+            <button onclick="closeTeamModal()"
+                class="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 bg-white/5 hover:bg-white/10 rounded-full flex items-center justify-center transition-colors z-10">
+                <i data-lucide="x" class="w-5 h-5 text-white"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div class="p-6 md:p-10">
+                <div class="flex flex-col md:flex-row gap-8 md:gap-10">
+                    <!-- Profile Photo -->
+                    <div class="flex-shrink-0">
+                        <div
+                            class="w-48 h-48 md:w-56 md:h-56 mx-auto md:mx-0 rounded-2xl overflow-hidden bg-gradient-to-br from-red-600/20 to-purple-600/20 flex items-center justify-center border-2 border-red-600/30">
+                            <!-- Image replaces Icon -->
+                            <img id="team-modal-image" src="" alt="" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Profile Info -->
+                    <div class="flex-1">
+                        <h2 id="team-modal-name" class="heading-font text-3xl md:text-5xl mb-2">Team Member</h2>
+                        <p id="team-modal-role" class="text-red-500 font-bold text-lg md:text-xl mb-4"></p>
+                        <p id="team-modal-tagline" class="text-gray-400 text-sm md:text-base mb-6 italic"></p>
+
+                        <!-- Bio -->
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3">About</h3>
+                            <p id="team-modal-bio" class="text-gray-300 text-sm md:text-base leading-relaxed"></p>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3">Expertise</h3>
+                            <div id="team-modal-skills" class="flex flex-wrap gap-2">
+                                <!-- Skills will be inserted here -->
+                            </div>
+                        </div>
+
+                        <!-- Contact -->
+                        <div class="flex flex-wrap gap-3">
+                            <a id="team-modal-email" href="#"
+                                class="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-xl transition-colors text-sm">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                Get in Touch
+                            </a>
+                            <a id="team-modal-linkedin" href="#" target="_blank"
+                                class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white font-bold py-3 px-6 rounded-xl transition-colors text-sm border border-white/10">
+                                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                                LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-black border-t border-white/5 py-12 px-6 md:py-24">
+        <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 md:gap-12 text-center md:text-left">
+            <div>
+                <h4 class="text-3xl md:text-4xl font-900 mb-4 tracking-tighter"><span
+                        class="text-red-600">MONARCH</span>STUDIOS
+                </h4>
+                <p class="text-gray-500 max-w-sm mx-auto md:mx-0">Subscribe to our newsletter
+                    for the latest
+                    marketing insights, trends,
+                    and growth strategies.</p>
+
+                <div class="flex gap-6 mt-8 justify-center md:justify-start">
+                    <a href="https://www.linkedin.com/in/monarch-studios-8b0b543b0?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                        target="_blank" rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.instagram.com/monarchstudios10?igsh=eHN1aWNjNjVkNW03" target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-500 hover:text-[#E31E24] transition-colors p-2 bg-white/5 rounded-full hover:bg-white/10">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+            <div
+                class="w-full max-w-md flex flex-col sm:flex-row gap-2 bg-white/5 rounded-2xl p-2 border border-white/10">
+                <input type="text" placeholder="Your email address" id="email-input"
+                    class="bg-transparent flex-1 px-4 py-3 outline-none text-sm text-center sm:text-left">
+                <button
+                    class="bg-white text-black px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-widest flex-shrink-0">Subscribe</button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Team Members Data
+        const teamMembers = [
+            {
+                id: 0,
+                name: "Hrushikesh Varma",
+                tagline: "AI STUDENT",
+
+                image: "assets/hrushi.png",
+                bio: "With over 8 years of experience in digital transformation, Hrushikesh leads Monarch Studios with a passion for innovation and excellence. His strategic vision has helped countless businesses achieve their digital goals and scale to new heights.",
+                skills: ["Strategic Leadership", "Digital Strategy", "Business Development", "Innovation Management", "Team Building", "Client Relations"],
+                email: "mailto:hrushikesh@monarchstudios.com",
+                linkedin: "https://linkedin.com"
+            },
+            {
+                id: 1,
+                name: "Krishna Chaithanya",
+                tagline: "Architecting cutting-edge solutions",
+                icon: "code-2",
+                image: "https://images.unsplash.com/photo-1573496359-136d4755f306?auto=format&fit=crop&w=600&q=80",
+                bio: "Krishna is a technology enthusiast with expertise in modern web frameworks and AI integration. He ensures that every project leverages the latest technologies to deliver exceptional performance and user experience.",
+                skills: ["Full-Stack Development", "AI/ML Integration", "Cloud Architecture", "System Design", "DevOps", "Technical Leadership"],
+                email: "mailto:krishna@monarchstudios.com",
+                linkedin: "https://linkedin.com"
+            },
+            {
+                id: 2,
+                name: "Revanth",
+                tagline: "Crafting memorable brand experiences",
+                icon: "palette",
+                image: "assets/revanth.jpeg",
+                bio: "Revanth brings creativity and strategic thinking to every project. With a keen eye for design and user experience, he transforms ideas into visually stunning and highly effective digital solutions.",
+                skills: ["UI/UX Design", "Brand Identity", "Visual Design", "Motion Graphics", "Creative Strategy", "Design Systems"],
+                email: "mailto:revanth@monarchstudios.com",
+                linkedin: "https://linkedin.com"
+            },
+            {
+                id: 3,
+                name: "Ganesh",
+                tagline: "Driving growth through data-driven strategies",
+                icon: "trending-up",
+                image: "assets/ganesh.jpeg",
+                bio: "Ganesh specializes in digital marketing strategies that deliver measurable results. His data-driven approach and deep understanding of SEO, content marketing, and social media help clients achieve sustainable growth.",
+                skills: ["Digital Marketing", "SEO/SEM", "Content Strategy", "Analytics", "Social Media Marketing", "Growth Hacking"],
+                email: "mailto:ganesh@monarchstudios.com",
+                linkedin: "https://linkedin.com"
+            }
+        ];
+
+        // Render Team Members (Accordion Style)
+        function renderTeam() {
+            const container = document.getElementById('team-accordion');
+            if (container) {
+                container.innerHTML = teamMembers.map((member, index) => `
+                    <div class="team-card" onclick="toggleActiveCard(this)">
+                        <img src="${member.image}" alt="${member.name}">
+                        <div class="team-info">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-1">${member.name}</h3>
+                            <p class="text-red-500 text-sm md:text-base font-bold uppercase tracking-widest mb-2">${member.tagline}</p>
+                            <button onclick="openTeamModal(${member.id}); event.stopPropagation();" class="text-xs font-bold uppercase tracking-widest text-white hover:text-red-500 transition-colors flex items-center gap-2 mt-4">
+                                View Profile <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+            }
+        }
+
+        function toggleActiveCard(card) {
+            // Check if card is already active
+            const isActive = card.classList.contains('active');
+
+            // Remove active class from all cards
+            document.querySelectorAll('.team-card').forEach(c => c.classList.remove('active'));
+
+            // If it wasn't active, make it active (toggle behavior)
+            // If it was already active, we just removed it above, so it collapses (toggle off)
+            if (!isActive) {
+                card.classList.add('active');
+            }
+        }
+
+        // Open Team Modal
+        function openTeamModal(memberId) {
+            const member = teamMembers.find(m => m.id === memberId);
+            if (!member) return;
+
+            document.getElementById('team-modal-name').textContent = member.name;
+            document.getElementById('team-modal-tagline').textContent = member.tagline;
+            document.getElementById('team-modal-bio').textContent = member.bio;
+
+            const imgEl = document.getElementById('team-modal-image');
+            imgEl.src = member.image;
+            imgEl.alt = member.name;
+
+            const skillsEl = document.getElementById('team-modal-skills');
+            skillsEl.innerHTML = member.skills.map(skill => `
+                <span class="bg-red-600/10 text-red-500 px-4 py-2 rounded-lg text-sm font-semibold border border-red-600/20">
+                    ${skill}
+                </span>
+            `).join('');
+
+            document.getElementById('team-modal-email').href = member.email;
+            document.getElementById('team-modal-linkedin').href = member.linkedin;
+
+            const modal = document.getElementById('team-modal');
+            const modalContent = modal.querySelector('div'); // Get the inner content div
+
+            modal.classList.remove('hidden');
+            // Remove animation class to reset if already open (edge case), then add it back
+            modalContent.classList.remove('modal-content-animate');
+            void modalContent.offsetWidth; // Trigger reflow to restart animation
+            modalContent.classList.add('modal-content-animate');
+
+            document.body.style.overflow = 'hidden';
+
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.style.display = 'none';
+            }
+
+            lucide.createIcons();
+        }
+
+        function closeTeamModal() {
+            const modal = document.getElementById('team-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+
+            const nav = document.querySelector('nav');
+            if (nav) {
+                nav.style.display = '';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeTeamModal();
+            }
+        });
+
+        document.getElementById('team-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'team-modal') {
+                closeTeamModal();
+            }
+        });
+
+        // Theme Logic
+        let currentTheme = localStorage.getItem('site_theme') || 'dark';
+
+        function setTheme(theme) {
+            currentTheme = theme;
+            localStorage.setItem('site_theme', theme);
+
+            if (theme === 'light') {
+                document.body.classList.add('light-theme');
+            } else {
+                document.body.classList.remove('light-theme');
+            }
+
+            const btn = document.querySelector('button[aria-label="Toggle Theme"]');
+            if (btn) {
+                const iconName = theme === 'light' ? 'moon' : 'sun';
+                btn.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i>`;
+                lucide.createIcons();
+            }
+        }
+
+        function toggleTheme() {
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        // Initialize Theme - Force Dark Mode Default on First Visit
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('site_theme')) {
+                setTheme('dark');
+            } else {
+                setTheme(currentTheme);
+            }
+            renderTeam();
+        });
+
+        // Navbar Scroll Effect
+        const nav = document.querySelector('nav');
+        let isScrolled = false;
+        let fadeTimeout;
+
+        window.addEventListener('scroll', () => {
+            const shouldBeScrolled = window.scrollY > 50;
+
+            if (shouldBeScrolled !== isScrolled) {
+                clearTimeout(fadeTimeout);
+                nav.classList.add('fading');
+                fadeTimeout = setTimeout(() => {
+                    if (shouldBeScrolled) {
+                        nav.classList.add('scrolled');
+                    } else {
+                        nav.classList.remove('scrolled');
+                    }
+                    setTimeout(() => {
+                        nav.classList.remove('fading');
+                    }, 50);
+                }, 300);
+                isScrolled = shouldBeScrolled;
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('mobile-menu-icon');
+            const isClosed = mobileMenu.classList.contains('scale-y-0');
+
+            if (!isClosed) {
+                // Close Menu
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-y-0');
+                menuIcon.setAttribute('data-lucide', 'menu');
+            } else {
+                // Open Menu
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-y-0');
+                menuIcon.setAttribute('data-lucide', 'x');
+            }
+            lucide.createIcons();
+        }
+    </script>
+</body>
+
+</html>
